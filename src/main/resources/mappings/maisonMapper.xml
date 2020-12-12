@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="maisonMapper">
+	<insert id="userInsert">
+		INSERT INTO MAISON_USER (SEQ, ID, PWD, NAME, PHONE, ADDRESS, EMAIL) 
+			VALUES (USER_SEQ.NEXTVAL, #{id}, #{pwd}, #{name}, #{phone}, #{address}, #{email}) 
+	</insert>
+	
+	<insert id="uploadInsert">
+		INSERT INTO MAISON_CONTENT (SEQ, TITLE, CONTENT, DT, FILE_PATH, C_FLAG) 
+			VALUES ((select max(seq) from maison_content)+1, #{title}, #{content}, SYSDATE, #{file_path}, #{c_flag}) 
+	</insert>
+	<select id="date_list" resultType="MaisonContentVO">
+	<![CDATA[
+        SELECT TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))-2, 'MM-DD') DATE1
+		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))-1, 'MM-DD') DATE2
+		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))+0, 'MM-DD') DATE3
+		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))+1, 'MM-DD') DATE4
+		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))+2, 'MM-DD') DATE5
+  		   FROM DUAL
+    ]]>
+	</select>
+	<select id="list" resultType="MaisonContentVO">
+		SELECT TITLE, CONTENT, DT, FILE_PATH 
+		FROM MAISON_CONTENT
+		WHERE C_FLAG='U'
+	</select>
+	
+	
+</mapper>

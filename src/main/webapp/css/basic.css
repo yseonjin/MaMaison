@@ -1,0 +1,81 @@
+@charset "UTF-8";
+header{
+	background : #D09E88;
+	color : #534847;
+	text-align : center;
+	height:100px;
+	line-height:100px;
+}
+.row-fluid nav div{
+	background : #534847;
+	text-align : center;
+	line-height:50px;
+	height : 700px;
+}
+
+section{
+	background : #FADAD8;
+	text-align : center;
+	height:700px;
+}
+footer{
+	background : #9B8281;
+	color : white;
+	text-align : center;
+	height:50px;
+	line-height:50px;
+}
+#login-text{
+	background : #9B8281;
+	color : white;
+	height:50px;
+	line-height:50px;
+}
+div.span10 #table_login{
+    vertical-align: middle;
+    border: 2px solid #CFAA9E;
+    text-align: center;
+    height : 300px;
+    width : 400px;
+    background-color: #F0E5DE;
+}
+div.span10 #table_login_ok{
+    vertical-align: middle;
+    border: 2px solid #CFAA9E;
+    text-align: center;
+    height : 400px;
+    width : 500px;
+    background-color: #F0E5DE;
+}
+div.span10 #table_diary{
+    vertical-align: middle;
+    border: 2px solid #CFAA9E;
+    text-align: left;
+    height : 500px;
+    width : 600px;
+    background-color: #F0E5DE;
+}
+div.span10 #table_list{
+	border: 2px solid #CFAA9E;
+    vertical-align: middle;
+    text-align: center;
+    width : 600px;
+    background-color: #F0E5DE;
+}
+div.span10 #main_text{
+    color: #49010F;
+    text-align: center;
+}
+div.span10 #diary_text{
+    text-align: left;
+    width : 500px;
+    height: 300px;
+    resize:none;
+}
+h2{
+	color: #534847;
+}
+A:link {color: #FFFFFF; text-decoration: none;}
+A:visited {color: #FFFFFF; text-decoration: none;}
+A:active {color: #FFFFFF; text-decoration: none;}
+A:hover {color: #000000; text-decoration: underline;}
