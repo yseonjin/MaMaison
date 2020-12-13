@@ -11,10 +11,8 @@
 	          <ul class="nav nav-list">
 			  	  <li><a href="home.jsp"><i class="icon-home icon-white"></i>&emsp;Home</a></li>
 				  <li><br></li>
-			   <c:if test="${id == null}">
 			  	  <li><a href="join.jsp"><i class=" icon-ok-sign icon-white"></i>&emsp;Join US</a></li>
 				  <li><br></li>
-			   </c:if>
 	           <c:if test="${id != null}">
 				  <li><a href="date_list.do?baseDate=2020-12-13"><i class="icon-book icon-white"></i>&emsp;Diary</a></li>
 				  <li><br></li>
@@ -34,7 +32,7 @@
       	  <br><br><br>
       	  <table id="table_login_ok">
       	  	<tr>
-      	  		<td><h1>회원가입이 완료되었습니다!</h1></td>
+      	  		<td><h1>회원탈퇴가 완료되었습니다!</h1></td>
       	  	</tr>
       	  	<tr>
       	  		<td><a href="home.jsp"><i class="icon-home icon-white"></i>&emsp;Home</a></td>

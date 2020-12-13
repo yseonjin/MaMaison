@@ -29,4 +29,20 @@ public class MaisonServiceImpl implements MaisonService{
 	public List<MaisonContentVO> content_list(MaisonContentVO vo) {
 		return dao.content_list(vo);
 	}
+	@Override
+	public MaisonUserVO login_ok(MaisonUserVO vo) {
+		return dao.login_ok(vo);
+	}
+	@Override
+	public MaisonUserVO user_master(MaisonUserVO vo) {
+		return dao.user_master(vo);
+	}
+	@Override
+	public void user_delete(MaisonUserVO vo) {
+		dao.user_delete(vo);
+	}
+	@Override
+	public void user_update(MaisonUserVO vo) {
+		dao.user_update(vo);
+	}
 }

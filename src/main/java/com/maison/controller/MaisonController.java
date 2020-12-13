@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,13 @@ public class MaisonController {
 	@Autowired
 	MaisonService s;
 	
-	// 회원가입 (insert)
+	// 회원가입 
 	@RequestMapping(value = "/join_insert.do")
 	public String join_insert(MaisonUserVO vo) {
 		s.insertUser(vo);
 		return "join_ok.jsp";
 	}
+	// 사진업로드
 	@RequestMapping(value = "/upload_insert.do", method = RequestMethod.POST)
 	public String upload_insert(MaisonContentVO vo, HttpServletRequest request) {
 		  		
@@ -59,16 +61,59 @@ public class MaisonController {
 		s.insertUpload(vo);
 		return "list.do";
 	}
+	// 다이어리 날짜출력
 	@RequestMapping(value = "/date_list.do")
 	public String date_list(MaisonContentVO vo, Model m) {
 		m.addAttribute("m", s.date_list(vo));
 		return "diary_list.jsp";
 	}
+	// 사진첩 자료실목록보기
 	@RequestMapping(value = "/list.do")
 	public String content_list(MaisonContentVO vo, Model m) {
 		m.addAttribute("flist", s.content_list(vo));
 		return "list.jsp";
 	}
+	// 회원정보수정 첫화면
+	@RequestMapping(value = "/user_master1.do")
+	public String user_master1(MaisonUserVO vo, Model m, HttpSession session) {
+		vo.setId((String)session.getAttribute("id"));
+		m.addAttribute("user", s.user_master(vo));
+		return "user_master.jsp";
+	}
+	// 회원정보수정 상세화면
+	@RequestMapping(value = "/user_master2.do")
+	public String user_master2(MaisonUserVO vo, Model m, HttpSession session) {
+		vo.setId((String)session.getAttribute("id"));
+		m.addAttribute("user", s.user_master(vo));
+		return "user_master2.jsp";
+	}
+	// 회원정보수정 완료
+	@RequestMapping(value = "user_edit.do")
+	public String user_edit(MaisonUserVO vo) {
+		s.user_update(vo);
+		return "user_edit_ok.jsp";
+	}
 	
+	// 회원탈퇴
+	@RequestMapping(value = "/user_delete.do")
+	public String user_delete(MaisonUserVO vo, HttpSession session) {
+		s.user_delete(vo);
+		session.invalidate();
+		return "user_delete_ok.jsp";
+	}
+	// 로그인확인
+	@RequestMapping(value = "/login.do")
+	public String login_ok(MaisonUserVO vo, HttpSession session) {
+		if(s.login_ok(vo) != null) {
+			session.setAttribute("id", vo.getId());
+		}
+		return "home.jsp";
+	}
+	// 로그아웃
+	@RequestMapping(value = "/logout.do")
+	public String logout_ok(MaisonUserVO vo, HttpSession session) {
+		session.invalidate();
+		return "home.jsp";
+	}
 	
 }

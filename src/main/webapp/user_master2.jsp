@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="./top.jsp"></c:import>
 <div class="container">
-	<div class="row-fluid"> 
+	<div class="row-fluid">
 	<nav>
 	  <div class="span2">
 	      <br><br>
 	      <!--Sidebar content-->
-	          <ul class="nav nav-list">
+	            <ul class="nav nav-list">
 			  	  <li><a href="home.jsp"><i class="icon-home icon-white"></i>&emsp;Home</a></li>
 				  <li><br></li>
 			   <c:if test="${id == null}">
@@ -31,57 +31,71 @@
       <div class="span10">
       	<!--Body content-->
       	<div align="center">
-      	<br><br>
-      	<h2> 오늘의 한마디 </h2>
+      	<br><br><br>
+      	<h2> 회원정보수정 </h2>
       	<br>
-      	  <form class="form-horizontal" action="join_insert.do" >
-      	  <table id="table_diary">
+      	  <form class="form-horizontal" action="user_edit.do" >
+      	  
+      	  <table id="table_login">
       	  	<tr>
-      	  		<td width="70">
-      	  			&emsp;제목  :
+      	  		<td>
+      	  			ID (수정불가)
       	  		</td>
       	  		<td>
-      	  			<input type="text" name="title" size=20>
+      	  			<input type="text" placeholder="Id" name="id" value="${user.id}" readonly="readonly">
       	  		</td>
       	  	</tr>
       	  	<tr>
       	  		<td>
-      	  			&emsp;날짜  :
+      	  			PASSWORD
       	  		</td>
       	  		<td>
-      	  			<input type="date" id="dt" name="dt" size=20 value="">
+      	  			<input type="password" placeholder="Password" name="pwd" value="${user.pwd}">
       	  		</td>
       	  	</tr>
       	  	<tr>
       	  		<td>
-      	  			&emsp;기분  :
+      	  			NAME
       	  		</td>
       	  		<td>
-      	  			<input type="password" name="condi" size=30>
+      	  			<input type="text" placeholder="Name" name="name" value="${user.name}">
       	  		</td>
       	  	</tr>
       	  	<tr>
       	  		<td>
-      	  			&emsp;글쓰기  :
+      	  			PHONE
       	  		</td>
       	  		<td>
-      	  			<textarea rows="10" cols="100" name="content" id="diary_text" ></textarea>
+      	  			<input type="text" placeholder="010-0000-0000" name="phone" value="${user.phone}"> 
       	  		</td>
       	  	</tr>
       	  	<tr>
-      	  		<td colspan=2 align="center">
-      	  			<button type="submit" class="btn btn-warning">일기쓰기완료</button>&emsp;&emsp;
- 				    <button type="reset" class="btn">다시쓰기</button>
+      	  		<td>
+      	  			ADDRESS
+      	  		</td>
+      	  		<td>
+      	  			<input type="text" placeholder="서울시 중구..." name="address" size=20 value="${user.address}">
+      	  		</td>
+      	  	</tr>
+      	  	<tr>
+      	  		<td>
+      	  			E-MAIL
+      	  		</td>
+      	  		<td>
+      	  			<input type="text" placeholder="aaa@gmail.com" name="email" size=20 value="${user.email}">
+      	  		</td>
+      	  	</tr>
+      	  	<tr>
+      	  		<td colspan=2>
+      	  			<input type="hidden" name=seq value="${user.seq}">
+      	  			<input type="submit" value="수정하기완료">&emsp;&emsp;
       	  		</td>
       	  	</tr>
 		</table>
 		</form> 
 	  </div>
-     </div>
+      </div>
      </section>
     </div>	
 </div>
 <c:import url="./bottom.jsp"></c:import>
-<script>
-document.getElementById('dt').value = new Date().toISOString().substring(0, 10);
-</script>

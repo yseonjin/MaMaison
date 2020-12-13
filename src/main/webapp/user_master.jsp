@@ -8,7 +8,7 @@
 	  <div class="span2">
 	      <br><br>
 	      <!--Sidebar content-->
-	          <ul class="nav nav-list">
+	         <ul class="nav nav-list">
 			  	  <li><a href="home.jsp"><i class="icon-home icon-white"></i>&emsp;Home</a></li>
 				  <li><br></li>
 			   <c:if test="${id == null}">
@@ -28,20 +28,40 @@
 	   </div>
 	</nav>  
     <section>
-    <div align="center">>
       <div class="span10">
       	<!--Body content-->
-      	  <br><br><br>
-      	  <table id="table_login_ok">
+      	 <div align="center">
+      	<br><br><br>
+      	<h2> 회원정보수정 </h2>
+      	<br>
+      	  <form class="form-horizontal" action="join_insert.do" >
+      	  
+      	  <table id="table_login">
       	  	<tr>
-      	  		<td><h1>회원가입이 완료되었습니다!</h1></td>
+      	  		<td>ID</td> <td>${user.id}</td>
       	  	</tr>
       	  	<tr>
-      	  		<td><a href="home.jsp"><i class="icon-home icon-white"></i>&emsp;Home</a></td>
+      	  		<td>NAME</td> <td>${user.name}</td>
       	  	</tr>
-      	  </table>    	  	
+      	  	<tr>
+      	  		<td>PHONE</td> <td>${user.phone}</td>
+      	  	</tr>
+      	  	<tr>
+      	  		<td>ADDRESS</td> <td>${user.address}</td>
+      	  	</tr>
+      	  	<tr>
+      	  		<td>E-MAIL</td> <td>${user.email}</td>
+      	  	</tr>
+      	  	<tr>
+      	  		<td colspan=2>
+      	  			<a href="user_master2.do"><input type="button" value="회원정보수정"></a>&emsp;&emsp;
+      	  			<a href="user_delete.do?seq=${user.seq}"><input type="button" value="회원탈퇴"></a>
+      	  		</td>
+      	  	</tr>
+		</table>
+		</form> 
+	  </div>
       </div>
-     </div>
      </section>
     </div>	
 </div>

@@ -34,7 +34,7 @@
       	  <br><br><br>
       	  <table id="table_login_ok">
       	  	<tr>
-      	  		<td><h1>회원가입이 완료되었습니다!</h1></td>
+      	  		<td><h1>정보수정이 완료되었습니다!</h1></td>
       	  	</tr>
       	  	<tr>
       	  		<td><a href="home.jsp"><i class="icon-home icon-white"></i>&emsp;Home</a></td>

@@ -11,15 +11,19 @@
 	         <ul class="nav nav-list">
 			  	  <li><a href="home.jsp"><i class="icon-home icon-white"></i>&emsp;Home</a></li>
 				  <li><br></li>
+			   <c:if test="${id == null}">
 			  	  <li><a href="join.jsp"><i class=" icon-ok-sign icon-white"></i>&emsp;Join US</a></li>
 				  <li><br></li>
-				  <li><a href="date_list.do"><i class="icon-book icon-white"></i>&emsp;Diary</a></li>
+			   </c:if>
+	           <c:if test="${id != null}">
+				  <li><a href="date_list.do?baseDate=2020-12-13"><i class="icon-book icon-white"></i>&emsp;Diary</a></li>
 				  <li><br></li>
-				  <li><a href="upload.jsp"><i class="icon-plus icon-white"></i>&emsp;Upload</a></li>
+				  <li><a href="upload.jsp"><i class="icon-plus icon-white"></i>&emsp;사진기록</a></li>
 				  <li><br></li>
-				  <li><a href="list.do"><i class="icon-list icon-white"></i>&emsp;My Board</a></li>
+				  <li><a href="list.do"><i class="icon-list icon-white"></i>&emsp;Photos</a></li>
 				  <li><br></li>
-				  <li><a href="#"><i class="icon-pencil icon-white"></i>&emsp;발도장</a></li>
+				  <li><a href="user_master1.do"><i class=" icon-cog icon-white"></i>&emsp;회원정보수정</a></li>
+			   </c:if>
 			 </ul>
 	   </div>
 	</nav>  

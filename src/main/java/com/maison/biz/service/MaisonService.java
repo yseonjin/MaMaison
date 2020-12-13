@@ -10,4 +10,9 @@ public interface MaisonService {
 	void insertUpload(MaisonContentVO vo);
 	MaisonContentVO date_list(MaisonContentVO vo);
 	List<MaisonContentVO> content_list(MaisonContentVO vo);
+	MaisonUserVO login_ok(MaisonUserVO vo);
+	MaisonUserVO user_master(MaisonUserVO vo);
+	void user_delete(MaisonUserVO vo);
+	void user_update(MaisonUserVO vo);
+	
 }
