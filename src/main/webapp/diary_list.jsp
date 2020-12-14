@@ -16,7 +16,7 @@
 				  <li><br></li>
 			   </c:if>
 	           <c:if test="${id != null}">
-				  <li><a href="date_list.do?baseDate=2020-12-13"><i class="icon-book icon-white"></i>&emsp;Diary</a></li>
+				  <li><a href="date_list.do?baseDate=today"><i class="icon-book icon-white"></i>&emsp;Diary</a></li>
 				  <li><br></li>
 				  <li><a href="upload.jsp"><i class="icon-plus icon-white"></i>&emsp;사진기록</a></li>
 				  <li><br></li>
@@ -35,11 +35,11 @@
       	<h2> Diary : 일기장 </h2>
       	<br>
       	<form action="date_list.do" >
-      		<input type="button" name="basedate" value="${m.date1}">&emsp;
-      		<input type="button" name="basedate" value="${m.date2}">&emsp;
-      		<input type="button" name="basedate" value="${m.date3}">&emsp;
-      		<input type="button" name="basedate" value="${m.date4}">&emsp;
-      		<input type="button" name="basedate" value="${m.date5}">
+      		<input type="submit" name="baseDate" value="${m.date1}">&emsp;
+      		<input type="submit" name="baseDate" value="${m.date2}">&emsp;
+      		<input type="submit" name="baseDate" value="${m.date3}">&emsp;
+      		<input type="submit" name="baseDate" value="${m.date4}">&emsp;
+      		<input type="submit" name="baseDate" value="${m.date5}">
       	</form>
       	  <table id="table_diary">
       	  	<tr>
@@ -47,7 +47,7 @@
       	  			&emsp;제목  :
       	  		</td>
       	  		<td>
-      	  			<input type="text" name="title" size=20>
+      	  			${c.title}
       	  		</td>
       	  	</tr>
       	  	<tr>
@@ -55,7 +55,7 @@
       	  			&emsp;날짜  :
       	  		</td>
       	  		<td>
-      	  			<input type="date" id="dt" name="dt" size=20 value="">
+					${c.dt}
       	  		</td>
       	  	</tr>
       	  	<tr>
@@ -63,21 +63,20 @@
       	  			&emsp;기분  :
       	  		</td>
       	  		<td>
-      	  			<input type="password" name="condi" size=30>
+      	  			${c.condition}
       	  		</td>
       	  	</tr>
       	  	<tr>
       	  		<td>
-      	  			&emsp;글쓰기  :
+      	  			&emsp;글내용  :
       	  		</td>
       	  		<td>
-      	  			<textarea rows="10" cols="100" name="content" id="diary_text" ></textarea>
+      	  			${c.content}
       	  		</td>
       	  	</tr>
       	  	<tr>
       	  		<td colspan=2 align="center">
-      	  			<button type="submit" class="btn btn-warning">일기쓰기완료</button>&emsp;&emsp;
- 				    <button type="reset" class="btn">다시쓰기</button>
+      	  			<a href="diary_edit.do?seq=${c.seq}"><input type="button" value="수정하기"></a>&emsp;&emsp;
       	  		</td>
       	  	</tr>
 		</table>

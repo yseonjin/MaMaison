@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:import url="./top.jsp"></c:import>
 <div class="container">
-	<div class="row-fluid">
+	<div class="row-fluid"> 
 	<nav>
 	  <div class="span2">
 	      <br><br>
@@ -33,27 +32,52 @@
       	<!--Body content-->
       	<div align="center">
       	<br><br>
-      	<h2> 게시판 : 나만의 서랍 </h2>
+      	<h2> 오늘의 한마디 </h2>
       	<br>
-      	  <table border=1 id="table_list">
+      	  <form class="form-horizontal" action="join_insert.do" >
+      	  <table id="table_diary">
       	  	<tr>
-      	  		<td> 제목 </td> <td> 파일 </td> <td> 작성일 </td>
-      	  	</tr>
-      	  	<c:forEach items="${flist}" var="f">
-      	  	<tr>
-      	  		<td width=200> ${f.getTitle()} </td> 
-      	  		<td width=200> <img src="./file/${f.getFile_path()}" width=100 height=100 > </td>
-				<td width=200> ${f.getDt()}</td>
-      	  	</tr>
-      	 	</c:forEach>	
-      	  	<tr>
-      	  		<td colspan=4 align="center" >
- 				    <a href="upload.jsp"><button type="reset" class="btn">다시쓰기</button></a>
+      	  		<td width="70">
+      	  			&emsp;제목  :
+      	  		</td>
+      	  		<td>
+      	  			<input type="text" name="title" size=20 value="${c.title}">
       	  		</td>
       	  	</tr>
-		</table> 
-	   </div>
-      </div>
+      	  	<tr>
+      	  		<td>
+      	  			&emsp;날짜 <br>(수정불가)  :
+      	  		</td>
+      	  		<td>
+      	  			<input type="text" name="dt" size=20 value="${c.dt}" readonly="readonly">
+      	  		</td>
+      	  	</tr>
+      	  	<tr>
+      	  		<td>
+      	  			&emsp;기분  :
+      	  		</td>
+      	  		<td>
+      	  			<input type="text" name="condition" size=30 value="${c.condition}">
+      	  		</td>
+      	  	</tr>
+      	  	<tr>
+      	  		<td>
+      	  			&emsp;글수정  :
+      	  		</td>
+      	  		<td>
+      	  			<textarea rows="10" cols="100" name="content" id="diary_text">${c.content}</textarea>
+      	  		</td>
+      	  	</tr>
+      	  	<tr>
+      	  		<td colspan=2 align="center">
+      	  			<button type="submit" class="btn btn-warning">일기쓰기완료</button>&emsp;&emsp;
+ 				    <button type="reset" class="btn">다시쓰기</button>
+      	  		</td>
+      	  	</tr>
+		</table>
+		</form> 
+	  </div>
+     </div>
      </section>
     </div>	
 </div>

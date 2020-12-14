@@ -2,6 +2,8 @@ package com.maison.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,11 +63,25 @@ public class MaisonController {
 		s.insertUpload(vo);
 		return "list.do";
 	}
-	// 다이어리 날짜출력
+	// 다이어리 출력
 	@RequestMapping(value = "/date_list.do")
 	public String date_list(MaisonContentVO vo, Model m) {
+		// 다이어리 날짜출력
+		if(vo.getBaseDate().equals("today")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			Calendar c1 = Calendar.getInstance();
+			vo.setBaseDate(sdf.format(c1.getTime()));
+		}
 		m.addAttribute("m", s.date_list(vo));
+		// 다이어리 내용출력
+		m.addAttribute("c", s.diary_list(vo));
 		return "diary_list.jsp";
+	}
+	// 다이어리 수정페이지 출력
+	@RequestMapping(value = "/diary_edit.do")
+	public String diary_edit(MaisonContentVO vo, Model m) {
+		m.addAttribute("c", s.diary_edit(vo));
+		return "diary_edit.jsp";
 	}
 	// 사진첩 자료실목록보기
 	@RequestMapping(value = "/list.do")

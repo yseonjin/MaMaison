@@ -16,7 +16,7 @@
 				  <li><br></li>
 			   </c:if>
 	           <c:if test="${id != null}">
-				  <li><a href="date_list.do?baseDate=2020-12-13"><i class="icon-book icon-white"></i>&emsp;Diary</a></li>
+				  <li><a href="date_list.do?baseDate=today"><i class="icon-book icon-white"></i>&emsp;Diary</a></li>
 				  <li><br></li>
 				  <li><a href="upload.jsp"><i class="icon-plus icon-white"></i>&emsp;사진기록</a></li>
 				  <li><br></li>

@@ -14,5 +14,7 @@ public interface MaisonDAO {
 	MaisonUserVO user_master(MaisonUserVO vo);
 	void user_delete(MaisonUserVO vo);
 	void user_update(MaisonUserVO vo);
+	MaisonContentVO diary_list(MaisonContentVO vo);
+	MaisonContentVO diary_edit(MaisonContentVO vo);
 
 }
