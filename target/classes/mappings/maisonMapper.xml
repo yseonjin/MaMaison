@@ -14,11 +14,11 @@
 <!-- 다이어리리스트 날짜목록 -->	
 	<select id="date_list" resultType="MaisonContentVO">
 	<![CDATA[
-        SELECT TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))-2, 'MM-DD') DATE1
-		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))-1, 'MM-DD') DATE2
-		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))+0, 'MM-DD') DATE3
-		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))+1, 'MM-DD') DATE4
-		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))+2, 'MM-DD') DATE5
+        SELECT TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))-2, 'YYYY-MM-DD') DATE1
+		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))-1, 'YYYY-MM-DD') DATE2
+		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))+0, 'YYYY-MM-DD') DATE3
+		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))+1, 'YYYY-MM-DD') DATE4
+		     , TO_CHAR(TO_DATE(DECODE(#{baseDate}, 'TODAY', TO_CHAR(SYSDATE, 'YYYY-MM-DD'), #{baseDate}))+2, 'YYYY-MM-DD') DATE5
   		   FROM DUAL
     ]]>
 	</select>
