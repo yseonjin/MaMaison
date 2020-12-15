@@ -6,6 +6,7 @@
   <typeAliases>
     <typeAlias type="com.maison.biz.common.MaisonUserVO" alias="MaisonUserVO" />
     <typeAlias type="com.maison.biz.common.MaisonContentVO" alias="MaisonContentVO" />
+    <typeAlias type="com.maison.biz.common.MaisonPageVO" alias="MaisonPageVO" />
   </typeAliases>
   
   <mappers>

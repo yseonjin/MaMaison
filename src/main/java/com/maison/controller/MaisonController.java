@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.maison.biz.common.MaisonContentVO;
+import com.maison.biz.common.MaisonPageVO;
 import com.maison.biz.common.MaisonUserVO;
 import com.maison.biz.service.MaisonService;
 
@@ -85,7 +86,17 @@ public class MaisonController {
 	}
 	// 사진첩 자료실목록보기
 	@RequestMapping(value = "/list.do")
-	public String content_list(MaisonContentVO vo, Model m) {
+	public String content_list(MaisonPageVO vo, Model m) {
+		int now_page = vo.getNow_page();
+		if(now_page == 0) {
+			vo.setNow_page(1);
+		}else {
+			vo.setNow_page(vo.getNow_page());
+		}
+		m.addAttribute("page", s.page_list(vo));
+		MaisonPageVO page = s.page_list(vo);
+		vo.setEnd_content(page.getEnd_content());
+		vo.setStart_content(page.getStart_content());
 		m.addAttribute("flist", s.content_list(vo));
 		return "list.jsp";
 	}

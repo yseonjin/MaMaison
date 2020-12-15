@@ -33,13 +33,13 @@
 		FROM MAISON_CONTENT
 		WHERE SEQ=#{seq}
 	</select>
-<!-- 사진첩목록보기(자료실) -->	
+<!-- 사진첩목록보기(자료실)
 	<select id="list" resultType="MaisonContentVO">
 		SELECT SEQ, TITLE, CONTENT, DT, FILE_PATH 
 		FROM MAISON_CONTENT
 		WHERE C_FLAG='U'
 		ORDER BY DT DESC
-	</select>
+	</select> -->
 <!--  로그인 --> 
 	<select id="login" resultType="MaisonUserVO">
 		SELECT * 
@@ -64,4 +64,49 @@
 		SET PWD=#{pwd}, NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}, EMAIL=#{email} 
 		WHERE SEQ=#{seq}
 	</update>
+<!-- 사진첩 페이지나누기 -->
+	<select id="page_div" resultType="MaisonPageVO"> 
+		<![CDATA[
+	       SELECT COUNT(*) AS "total_content"
+		     , CEIL(COUNT(*) / 50) AS "group_page"
+		     , TO_NUMBER(#{now_page}) AS "now_page"
+		     , CASE WHEN TO_NUMBER(#{now_page})-10 < 0 THEN 1 
+		                                         ELSE TO_NUMBER(CONCAT(SUBSTR(#{now_page}, 1,LENGTH(#{now_page})-1),'1')) 
+		       END AS "start_page"
+		     , CASE WHEN CEIL(COUNT(*) / 5) - CASE WHEN TO_NUMBER(#{now_page})-10 < 0 THEN TO_CHAR(1) ELSE CONCAT(SUBSTR(#{now_page}, 1,LENGTH(#{now_page})-1),'1') END > 10
+		                THEN CASE WHEN TO_NUMBER(#{now_page})-10 < 0 THEN TO_CHAR(1) ELSE CONCAT(SUBSTR(#{now_page}, 1,LENGTH(#{now_page})-1),'1') END + 9
+		                ELSE CEIL(COUNT(*) / 5)
+		       END AS "end_page"
+		     , CASE WHEN TO_NUMBER(#{now_page}) - 1 <= 0 THEN NULL
+		                                           ELSE TO_NUMBER(#{now_page}) - 1
+		       END AS "pre_page"
+		     , CASE WHEN TO_NUMBER(#{now_page}) = ROUND(CEIL(COUNT(*) / 5)) THEN NULL
+		                                                              ELSE TO_NUMBER(#{now_page}) + 1
+		       END AS "next_page"
+		     , CASE WHEN TO_NUMBER(#{now_page}) * 5 < COUNT(*) THEN 5
+		                                                 ELSE MOD(COUNT(*), 5)
+		       END AS "content_cnt"
+		     , (TO_NUMBER(#{now_page})*5)-4 AS "start_content"
+		     , CASE WHEN (TO_NUMBER(#{now_page})*5)-4 = COUNT(*) THEN (TO_NUMBER(#{now_page})*5)-4
+		                                                   ELSE (((TO_NUMBER(#{now_page})*5)-4) + CASE WHEN TO_NUMBER(#{now_page}) * 5 < COUNT(*) THEN 5 ELSE MOD(COUNT(*), 5) END) - 1
+		       END AS "end_content"
+	  		FROM (SELECT ROWNUM R_NUM, C.* FROM MAISON_CONTENT C WHERE C_FLAG = 'U')
+    	]]>	
+	</select>
+<!-- 사진첩 글 뽑아내기 -->
+	<select id="list" resultType="MaisonContentVO">
+		<![CDATA[
+			SELECT ROWNUM, P.SEQ, P.TITLE, P.CONTENT, P.DT, P.FILE_PATH
+			FROM(
+			      (SELECT ROWNUM AS RN, K.*  
+			      FROM(
+			      	SELECT * FROM MAISON_CONTENT 
+			            WHERE C_FLAG = 'U'
+			          ORDER BY SEQ DESC)K
+			      WHERE ROWNUM <= #{end_content}
+			      )P
+			) WHERE RN >= #{start_content}
+    	]]>	
+	
+	</select>
 </mapper>

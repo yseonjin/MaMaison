@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.maison.biz.common.MaisonContentVO;
+import com.maison.biz.common.MaisonPageVO;
 import com.maison.biz.common.MaisonUserVO;
 @Repository
 public class MaisonDAOImpl implements MaisonDAO{
@@ -27,9 +28,14 @@ public class MaisonDAOImpl implements MaisonDAO{
 	public MaisonContentVO date_list(MaisonContentVO vo) {
 		return mybatis.selectOne("maisonMapper.date_list", vo);
 	}
+	// 사진첩페이지나누기
+	@Override
+	public MaisonPageVO page_list(MaisonPageVO vo) {
+		return mybatis.selectOne("maisonMapper.page_div", vo);
+	}
 	// 사진첩목록보기
 	@Override
-	public List<MaisonContentVO> content_list(MaisonContentVO vo) {
+	public List<MaisonContentVO> content_list(MaisonPageVO vo) {
 		return mybatis.selectList("maisonMapper.list", vo);
 	}
 	// 로그인

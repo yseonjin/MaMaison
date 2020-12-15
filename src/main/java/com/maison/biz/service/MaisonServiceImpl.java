@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.maison.biz.common.MaisonContentVO;
+import com.maison.biz.common.MaisonPageVO;
 import com.maison.biz.common.MaisonUserVO;
 import com.maison.biz.dao.MaisonDAO;
 @Service
@@ -27,9 +28,14 @@ public class MaisonServiceImpl implements MaisonService{
 	public MaisonContentVO date_list(MaisonContentVO vo) {
 		return dao.date_list(vo);
 	}
+	// 사진첩 페이지나누기
+	@Override
+	public MaisonPageVO page_list(MaisonPageVO vo) {
+		return dao.page_list(vo);
+	}
 	// 다이어리 사진첩목록보기
 	@Override
-	public List<MaisonContentVO> content_list(MaisonContentVO vo) {
+	public List<MaisonContentVO> content_list(MaisonPageVO vo) {
 		return dao.content_list(vo);
 	}
 	// 다이어리 로그인
