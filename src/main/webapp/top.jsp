@@ -20,7 +20,7 @@
 	</header>
 	<div id="login-text"align="right">
 		<c:if test="${id == null}">
-		<form class="form-inline" action="login.do">
+		<form class="form-inline" action="login.do" method="post">
 		  <input type="text" class="input-small" placeholder="ID" name="id">
 		  <input type="password" class="input-small" placeholder="Password" name="pwd">&emsp;
 		  <button type="submit" class="btn">Log in</button>&emsp;

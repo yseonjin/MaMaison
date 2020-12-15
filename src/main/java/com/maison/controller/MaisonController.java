@@ -27,7 +27,7 @@ public class MaisonController {
 	MaisonService s;
 	
 	// 회원가입 
-	@RequestMapping(value = "/join_insert.do")
+	@RequestMapping(value = "/join_insert.do", method = RequestMethod.POST)
 	public String join_insert(MaisonUserVO vo) {
 		s.insertUser(vo);
 		return "join_ok.jsp";
@@ -104,7 +104,7 @@ public class MaisonController {
 		return "user_master2.jsp";
 	}
 	// 회원정보수정 완료
-	@RequestMapping(value = "user_edit.do")
+	@RequestMapping(value = "user_edit.do", method = RequestMethod.POST)
 	public String user_edit(MaisonUserVO vo) {
 		s.user_update(vo);
 		return "user_edit_ok.jsp";
@@ -118,7 +118,7 @@ public class MaisonController {
 		return "user_delete_ok.jsp";
 	}
 	// 로그인확인
-	@RequestMapping(value = "/login.do")
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String login_ok(MaisonUserVO vo, HttpSession session) {
 		if(s.login_ok(vo) != null) {
 			session.setAttribute("id", vo.getId());

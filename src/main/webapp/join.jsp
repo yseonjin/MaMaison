@@ -34,7 +34,7 @@
       	<br><br><br>
       	<h2> Join Us! 환영합니다 </h2>
       	<br>
-      	  <form class="form-horizontal" action="join_insert.do" >
+      	  <form class="form-horizontal" action="join_insert.do"  method="post">
       	  
       	  <table id="table_login">
       	  	<tr>

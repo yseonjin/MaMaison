@@ -34,7 +34,7 @@
       	<br><br><br>
       	<h2> 회원정보수정 </h2>
       	<br>
-      	  <form class="form-horizontal" action="user_edit.do" >
+      	  <form class="form-horizontal" action="user_edit.do" method="post" >
       	  
       	  <table id="table_login">
       	  	<tr>
