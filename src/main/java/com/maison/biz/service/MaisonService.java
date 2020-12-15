@@ -18,4 +18,7 @@ public interface MaisonService {
 	void user_update(MaisonUserVO vo);
 	MaisonContentVO diary_list(MaisonContentVO vo);
 	MaisonContentVO diary_edit(MaisonContentVO vo);
+	void diary_editOK(MaisonContentVO vo);
+	void diary_delete(MaisonContentVO vo);
+	void diary_insert(MaisonContentVO vo);
 }

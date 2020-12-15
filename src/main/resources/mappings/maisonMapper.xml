@@ -21,25 +21,34 @@
   		   FROM DUAL
 	</select>
 <!-- 다이어리리스트 -->
-	<select id="dairy_list" resultType="MaisonContentVO">
+	<select id="diary_list" resultType="MaisonContentVO">
 		SELECT SEQ, TITLE, CONTENT, CONDITION, DT, C_FLAG 
 		FROM MAISON_CONTENT
-		WHERE DT BETWEEN TO_DATE(#{baseDate},'yy/mm/dd') 
-					 AND TO_DATE(TO_DATE(#{baseDate})+1,'yy/mm/dd') AND C_FLAG='D'
+		WHERE TO_CHAR(dt,'yyyy-mm-dd')=#{baseDate} AND C_FLAG='D'
 	</select>
 <!-- 다이어리리 수정보기 -->
-	<select id="dairy_edit" resultType="MaisonContentVO">
+	<select id="diary_edit" resultType="MaisonContentVO">
 		SELECT SEQ, TITLE, CONTENT, CONDITION, DT, C_FLAG 
 		FROM MAISON_CONTENT
 		WHERE SEQ=#{seq}
 	</select>
-<!-- 사진첩목록보기(자료실)
-	<select id="list" resultType="MaisonContentVO">
-		SELECT SEQ, TITLE, CONTENT, DT, FILE_PATH 
+<!-- 다이어리 수정하기 -->
+	<update id="diary_editOK">
+		UPDATE MAISON_CONTENT 
+		SET TITLE=#{title}, CONDITION=#{condition}, CONTENT=#{content}
+		WHERE SEQ=#{seq} AND C_FLAG='D'
+	</update>
+<!-- 다이어리 삭제하기-->
+	<delete id="diary_delete">
+		DELETE 
 		FROM MAISON_CONTENT
-		WHERE C_FLAG='U'
-		ORDER BY DT DESC
-	</select> -->
+		WHERE SEQ=#{seq} AND C_FLAG='D'
+	</delete>
+<!-- 다이어리 글쓰기 -->
+	<insert id="diary_insert">
+		INSERT INTO MAISON_CONTENT (SEQ, TITLE, DT, CONDITION, CONTENT, C_FLAG) 
+			VALUES ((select max(seq) from maison_content)+1, #{title}, #{dt}, #{condition}, #{content}, #{c_flag})
+	</insert>
 <!--  로그인 --> 
 	<select id="login" resultType="MaisonUserVO">
 		SELECT * 
@@ -101,7 +110,7 @@
 			      (SELECT ROWNUM AS RN, K.*  
 			      FROM(
 			      	SELECT * FROM MAISON_CONTENT 
-			            WHERE C_FLAG = 'U'
+			            WHERE C_FLAG = 'U' 
 			          ORDER BY SEQ DESC)K
 			      WHERE ROWNUM <= #{end_content}
 			      )P

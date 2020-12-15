@@ -32,7 +32,7 @@
       	<!--Body content-->
       	  <div align="center">
       	<br><br>
-      	<h2> Diary : 일기장 </h2>
+      	<h2> Diary : 일기장 </h2> &emsp; <a href="diary.jsp"><input type="button" value="일기쓰기"></a>
       	<br>
       	<form action="date_list.do" >
       		<input type="submit" name="baseDate" value="${m.date1}">&emsp;
@@ -41,6 +41,7 @@
       		<input type="submit" name="baseDate" value="${m.date4}">&emsp;
       		<input type="submit" name="baseDate" value="${m.date5}">
       	</form>
+      	 <c:if test="${c.title != null}">
       	  <table id="table_diary">
       	  	<tr>
       	  		<td width="70">
@@ -77,9 +78,18 @@
       	  	<tr>
       	  		<td colspan=2 align="center">
       	  			<a href="diary_edit.do?seq=${c.seq}"><input type="button" value="수정하기"></a>&emsp;&emsp;
+      	  			<a href="diary_delete.do?seq=${c.seq}&dt=${c.dt}"><input type="button" value="삭제하기"></a>&emsp;&emsp;
       	  		</td>
       	  	</tr>
-		</table>
+		 </table>
+      	</c:if>
+      	<c:if test="${c.title == null}">
+      	  <table id="table_diary">
+      	 	<tr>
+      	 		<td align="center">표시할 일기가 없습니다 ㅠ.ㅠ!</td>
+      	 	</tr>
+      	  </table>
+      	</c:if>
 	  </div>
       </div>
      </section>

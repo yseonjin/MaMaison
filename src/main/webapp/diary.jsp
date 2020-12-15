@@ -34,7 +34,7 @@
       	<br><br>
       	<h2> 오늘의 한마디 </h2>
       	<br>
-      	  <form class="form-horizontal" action="join_insert.do" >
+      	  <form class="form-horizontal" action="diary_insert.do" method="post">
       	  <table id="table_diary">
       	  	<tr>
       	  		<td width="70">
@@ -57,7 +57,7 @@
       	  			&emsp;기분  :
       	  		</td>
       	  		<td>
-      	  			<input type="password" name="condi" size=30>
+      	  			<input type="text" name="condition" size=30>
       	  		</td>
       	  	</tr>
       	  	<tr>
@@ -70,8 +70,9 @@
       	  	</tr>
       	  	<tr>
       	  		<td colspan=2 align="center">
-      	  			<button type="submit" class="btn btn-warning">일기쓰기완료</button>&emsp;&emsp;
- 				    <button type="reset" class="btn">다시쓰기</button>
+      	  			<input type="hidden" value="D" name="c_flag">
+      	  			<input type="submit" value="일기쓰기완료">&emsp;&emsp;
+ 				    <input type="reset" value="다시쓰기">
       	  		</td>
       	  	</tr>
 		</table>

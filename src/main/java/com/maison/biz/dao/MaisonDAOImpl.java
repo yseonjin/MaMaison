@@ -61,12 +61,27 @@ public class MaisonDAOImpl implements MaisonDAO{
 	// 다이어리보기
 	@Override
 	public MaisonContentVO diary_list(MaisonContentVO vo) {
-		return mybatis.selectOne("maisonMapper.dairy_list", vo);
+		return mybatis.selectOne("maisonMapper.diary_list", vo);
 	}
 	// 다이어리 수정보기
 	@Override
 	public MaisonContentVO diary_edit(MaisonContentVO vo) {
-		return mybatis.selectOne("maisonMapper.dairy_edit", vo);
+		return mybatis.selectOne("maisonMapper.diary_edit", vo);
+	}
+	// 다이어리 수정하기
+	@Override
+	public void diary_editOK(MaisonContentVO vo) {
+		mybatis.update("maisonMapper.diary_editOK", vo);
+	}
+	// 다이어리 삭제하기
+	@Override
+	public void diary_delete(MaisonContentVO vo) {
+		mybatis.delete("maisonMapper.diary_delete", vo);
+	}
+	// 다이어리 글쓰기
+	@Override
+	public void diary_insert(MaisonContentVO vo) {
+		mybatis.insert("maisonMapper.diary_insert", vo);
 	}
 
 }

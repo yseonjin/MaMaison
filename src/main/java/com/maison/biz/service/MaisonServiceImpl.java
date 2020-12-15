@@ -68,4 +68,18 @@ public class MaisonServiceImpl implements MaisonService{
 	public MaisonContentVO diary_edit(MaisonContentVO vo) {
 		return dao.diary_edit(vo);
 	}
+	// 다이어리 수정하기
+	@Override
+	public void diary_editOK(MaisonContentVO vo) {
+		dao.diary_editOK(vo);
+	}
+	// 다이어리 삭제하기
+	@Override
+	public void diary_delete(MaisonContentVO vo) {
+		dao.diary_delete(vo);
+	}
+	@Override
+	public void diary_insert(MaisonContentVO vo) {
+		dao.diary_insert(vo);		
+	}
 }

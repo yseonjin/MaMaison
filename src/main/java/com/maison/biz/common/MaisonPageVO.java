@@ -21,10 +21,6 @@ public class MaisonPageVO {
 	private int start_content;
 	//끝데이터
 	private int end_content;
-	//검색분류
-	private String ch1;
-	//검색어
-	private String ch2;
 	
 	public int getTotal_content() {
 		return total_content;
@@ -87,24 +83,12 @@ public class MaisonPageVO {
 		this.end_content = end_content;
 	}
 	
-	public String getCh1() {
-		return ch1;
-	}
-	public void setCh1(String ch1) {
-		this.ch1 = ch1;
-	}
-	public String getCh2() {
-		return ch2;
-	}
-	public void setCh2(String ch2) {
-		this.ch2 = ch2;
-	}
 	@Override
 	public String toString() {
 		return "MaisonPageVO [total_content=" + total_content + ", now_page=" + now_page + ", start_page=" + start_page
 				+ ", end_page=" + end_page + ", pre_page=" + pre_page + ", next_page=" + next_page + ", group_page="
 				+ group_page + ", content_cnt=" + content_cnt + ", start_content=" + start_content + ", end_content="
-				+ end_content + ", ch1=" + ch1 + ", ch2=" + ch2 + "]";
+				+ end_content + "]";
 	}
 	
 }

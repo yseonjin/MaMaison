@@ -34,7 +34,7 @@
       	<br><br>
       	<h2> 오늘의 한마디 </h2>
       	<br>
-      	  <form class="form-horizontal" action="join_insert.do" >
+      	  <form class="form-horizontal" action="diary_edit_ok.do" method="post">
       	  <table id="table_diary">
       	  	<tr>
       	  		<td width="70">
@@ -70,8 +70,8 @@
       	  	</tr>
       	  	<tr>
       	  		<td colspan=2 align="center">
-      	  			<button type="submit" class="btn btn-warning">일기쓰기완료</button>&emsp;&emsp;
- 				    <button type="reset" class="btn">다시쓰기</button>
+      	  			<input type="hidden" value="${c.seq}" name="seq">
+      	  			<input type="submit" value="일기쓰기완료">&emsp;&emsp;
       	  		</td>
       	  	</tr>
 		</table>

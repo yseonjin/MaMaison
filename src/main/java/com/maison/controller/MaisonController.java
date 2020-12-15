@@ -84,6 +84,24 @@ public class MaisonController {
 		m.addAttribute("c", s.diary_edit(vo));
 		return "diary_edit.jsp";
 	}
+	// 다이어리 수정
+	@RequestMapping(value = "/diary_edit_ok.do" , method = RequestMethod.POST)
+	public String diary_editOK(MaisonContentVO vo) {
+		s.diary_editOK(vo);
+		return "date_list.do?baseDate="+vo.getDt();
+	}
+	// 다이어리 삭제
+	@RequestMapping(value = "/diary_delete.do")
+	public String diary_delete(MaisonContentVO vo) {
+		s.diary_delete(vo);
+		return "date_list.do?baseDate="+vo.getDt();
+	}
+	// 다이어리 쓰기
+	@RequestMapping(value = "/diary_insert.do")
+	public String diary_insert(MaisonContentVO vo) {
+		s.diary_insert(vo);
+		return "date_list.do?baseDate=today";
+	}
 	// 사진첩 자료실목록보기
 	@RequestMapping(value = "/list.do")
 	public String content_list(MaisonPageVO vo, Model m) {
