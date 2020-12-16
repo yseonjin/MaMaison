@@ -6,10 +6,10 @@
 		INSERT INTO MAISON_USER (SEQ, ID, PWD, P_SHA256, P_BCRYPT, NAME, PHONE, ADDRESS, EMAIL) 
 			VALUES (USER_SEQ.NEXTVAL, #{id}, #{pwd}, #{p_sha256},#{p_bcrypt}, #{name}, #{phone}, #{address}, #{email}) 
 	</insert>
-<!-- 사진업로드 -->	
+<!-- 게시판업로드 -->	
 	<insert id="uploadInsert">
-		INSERT INTO MAISON_CONTENT (SEQ, TITLE, CONTENT, DT, FILE_PATH, C_FLAG) 
-			VALUES ((select max(seq) from maison_content)+1, #{title}, #{content}, SYSDATE, #{file_path}, #{c_flag}) 
+		INSERT INTO MAISON_CONTENT (SEQ, TITLE, CONTENT, DT, FILE_PATH, C_FLAG , ID) 
+			VALUES ((select max(seq) from maison_content)+1, #{title}, #{content}, SYSDATE, #{file_path}, #{c_flag}, #{id} ) 
 	</insert>
 <!-- 다이어리리스트 날짜목록 -->	
 	<select id="date_list" resultType="MaisonContentVO">
@@ -24,7 +24,7 @@
 	<select id="diary_list" resultType="MaisonContentVO">
 		SELECT SEQ, TITLE, CONTENT, CONDITION, DT, C_FLAG 
 		FROM MAISON_CONTENT
-		WHERE TO_CHAR(dt,'yyyy-mm-dd')=#{baseDate} AND C_FLAG='D'
+		WHERE TO_CHAR(dt,'yyyy-mm-dd')=#{baseDate} AND C_FLAG='D' AND ID = #{id}
 	</select>
 <!-- 다이어리리 수정보기 -->
 	<select id="diary_edit" resultType="MaisonContentVO">
@@ -46,8 +46,8 @@
 	</delete>
 <!-- 다이어리 글쓰기 -->
 	<insert id="diary_insert">
-		INSERT INTO MAISON_CONTENT (SEQ, TITLE, DT, CONDITION, CONTENT, C_FLAG) 
-			VALUES ((select max(seq) from maison_content)+1, #{title}, #{dt}, #{condition}, #{content}, #{c_flag})
+		INSERT INTO MAISON_CONTENT (SEQ, TITLE, DT, CONDITION, CONTENT, C_FLAG, ID ) 
+			VALUES ((select max(seq) from maison_content)+1, #{title}, #{dt}, #{condition}, #{content}, #{c_flag}, #{id})
 	</insert>
 <!--  로그인 --> 
 	<select id="login" resultType="MaisonUserVO">
@@ -99,7 +99,7 @@
 		     , CASE WHEN (TO_NUMBER(#{now_page})*5)-4 = COUNT(*) THEN (TO_NUMBER(#{now_page})*5)-4
 		                                                   ELSE (((TO_NUMBER(#{now_page})*5)-4) + CASE WHEN TO_NUMBER(#{now_page}) * 5 < COUNT(*) THEN 5 ELSE MOD(COUNT(*), 5) END) - 1
 		       END AS "end_content"
-	  		FROM (SELECT ROWNUM R_NUM, C.* FROM MAISON_CONTENT C WHERE C_FLAG = 'U')
+	  		FROM (SELECT ROWNUM R_NUM, C.* FROM MAISON_CONTENT C WHERE C_FLAG = 'U' AND ID = #{id})
     	]]>	
 	</select>
 <!-- 사진첩 글 뽑아내기 -->
@@ -110,7 +110,7 @@
 			      (SELECT ROWNUM AS RN, K.*  
 			      FROM(
 			      	SELECT * FROM MAISON_CONTENT 
-			            WHERE C_FLAG = 'U' 
+			            WHERE C_FLAG = 'U' AND ID = #{id} 
 			          ORDER BY SEQ DESC)K
 			      WHERE ROWNUM <= #{end_content}
 			      )P

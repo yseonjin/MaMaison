@@ -33,9 +33,9 @@ public class MaisonController {
 		s.insertUser(vo);
 		return "join_ok.jsp";
 	}
-	// 사진업로드
+	// 업로드
 	@RequestMapping(value = "/upload_insert.do", method = RequestMethod.POST)
-	public String upload_insert(MaisonContentVO vo, HttpServletRequest request) {
+	public String upload_insert(MaisonContentVO vo, HttpServletRequest request, HttpSession session) {
 		  		
 		String realPath = request.getSession().getServletContext().getRealPath("/file/");
 		System.out.println(realPath);
@@ -60,13 +60,13 @@ public class MaisonController {
 				}else {
 					vo.setFile_path("empty.jpg");
 				}
-		
+		vo.setId((String)session.getAttribute("id"));
 		s.insertUpload(vo);
 		return "list.do";
 	}
 	// 다이어리 출력
 	@RequestMapping(value = "/date_list.do")
-	public String date_list(MaisonContentVO vo, Model m) {
+	public String date_list(MaisonContentVO vo, Model m, HttpSession session) {
 		// 다이어리 날짜출력
 		if(vo.getBaseDate().equals("today")) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -75,6 +75,7 @@ public class MaisonController {
 		}
 		m.addAttribute("m", s.date_list(vo));
 		// 다이어리 내용출력
+		vo.setId((String)session.getAttribute("id"));
 		m.addAttribute("c", s.diary_list(vo));
 		return "diary_list.jsp";
 	}
@@ -97,14 +98,16 @@ public class MaisonController {
 		return "date_list.do?baseDate="+vo.getDt();
 	}
 	// 다이어리 쓰기
-	@RequestMapping(value = "/diary_insert.do")
-	public String diary_insert(MaisonContentVO vo) {
+	@RequestMapping(value = "/diary_insert.do", method = RequestMethod.POST)
+	public String diary_insert(MaisonContentVO vo, HttpSession session) {
+		vo.setId((String)session.getAttribute("id"));
 		s.diary_insert(vo);
 		return "date_list.do?baseDate=today";
 	}
 	// 사진첩 자료실목록보기
 	@RequestMapping(value = "/list.do")
-	public String content_list(MaisonPageVO vo, Model m) {
+	public String content_list(MaisonPageVO vo, Model m, HttpSession session) {
+		vo.setId((String)session.getAttribute("id"));
 		int now_page = vo.getNow_page();
 		if(now_page == 0) {
 			vo.setNow_page(1);

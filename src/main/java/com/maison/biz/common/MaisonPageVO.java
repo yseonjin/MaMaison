@@ -21,6 +21,8 @@ public class MaisonPageVO {
 	private int start_content;
 	//끝데이터
 	private int end_content;
+	//게시판 출력구분을 위한 아이디
+	private String id;
 	
 	public int getTotal_content() {
 		return total_content;
@@ -82,13 +84,19 @@ public class MaisonPageVO {
 	public void setEnd_content(int end_content) {
 		this.end_content = end_content;
 	}
-	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		return "MaisonPageVO [total_content=" + total_content + ", now_page=" + now_page + ", start_page=" + start_page
 				+ ", end_page=" + end_page + ", pre_page=" + pre_page + ", next_page=" + next_page + ", group_page="
 				+ group_page + ", content_cnt=" + content_cnt + ", start_content=" + start_content + ", end_content="
-				+ end_content + "]";
+				+ end_content + ", id=" + id + "]";
 	}
+	
 	
 }

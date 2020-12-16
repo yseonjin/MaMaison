@@ -54,7 +54,7 @@
 		</table> 
 		<br>
 			<a href="list.do?now_page=${page.pre_page}">이전</a>&emsp;
-			<c:forEach var="i" begin="${page.start_page}" end="${page.start_page+1}" step="1">
+			<c:forEach var="i" begin="${page.start_page}" end="${page.end_page}" step="1">
 				<a href="list.do?now_page=${i}">${i}</a>&emsp;
 			</c:forEach>
 			<a href="list.do?now_page=${page.next_page}">다음</a>&emsp;

@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MaisonContentVO {
 	private int seq;
+	private String id;
 	private String title;
 	private String content;
 	private String condition;
@@ -104,11 +105,21 @@ public class MaisonContentVO {
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
 	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
-		return "MaisonContentVO [seq=" + seq + ", title=" + title + ", content=" + content + ", condition=" + condition
-				+ ", dt=" + dt + ", file_path=" + file_path + ", c_flag=" + c_flag + "]";
+		return "MaisonContentVO [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content
+				+ ", condition=" + condition + ", dt=" + dt + ", file_path=" + file_path + ", c_flag=" + c_flag
+				+ ", baseDate=" + baseDate + ", date1=" + date1 + ", date2=" + date2 + ", date3=" + date3 + ", date4="
+				+ date4 + ", date5=" + date5 + ", uploadFile=" + uploadFile + "]";
 	}
+	
 	
 	
 }
