@@ -16,6 +16,19 @@ public class MaisonDAOImpl implements MaisonDAO{
 	// 회원가입
 	@Override
 	public void insertUser(MaisonUserVO vo) {
+		// 패스워드 암호화저장
+		try {
+			SHA256 sha = SHA256.getInsatnce();
+			String shaPass;
+			shaPass = sha.getSha256(vo.getPwd().getBytes());
+			String bcPass = BCrypt.hashpw(shaPass, BCrypt.gensalt());
+			vo.setP_sha256(shaPass);
+			vo.setP_bcrypt(bcPass);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    // 쿼리문 실행 
 		mybatis.insert("maisonMapper.userInsert", vo);
 	}
 	// 사진업로드
@@ -40,8 +53,30 @@ public class MaisonDAOImpl implements MaisonDAO{
 	}
 	// 로그인
 	@Override
-	public MaisonUserVO login_ok(MaisonUserVO vo) {
-		return mybatis.selectOne("maisonMapper.login", vo);
+	public String login_ok(MaisonUserVO vo) {
+		// 암호화된 비밀번호 확인
+		String log = "";
+        try {
+        	SHA256   sha = SHA256.getInsatnce();
+        	String      orgPass = vo.getPwd();
+			String      shaPass = sha.getSha256(orgPass.getBytes());
+			MaisonUserVO temp = mybatis.selectOne("maisonMapper.login", vo);
+			if(temp.getP_bcrypt()!= null ) {
+	            if(BCrypt.checkpw(shaPass,temp.getP_bcrypt())) {
+	            //  오리지날 암호와  pwd2 를 비교해준다. !!	
+	               log = "ssuccess";  
+	               System.out.println("성공");
+	             } else {
+	               log = "fail";   
+	               System.out.println("암호 실패");
+	             }
+	          }			
+			
+		} catch (Exception e) {
+			log = "fail"; 
+			System.out.println("실패");
+		}
+		return log;
 	}
 	// 회원정보수정보기
 	@Override
@@ -56,6 +91,17 @@ public class MaisonDAOImpl implements MaisonDAO{
 	// 회원정보수정완료
 	@Override
 	public void user_update(MaisonUserVO vo) {
+		// 수정된 비밀번호 암호화
+	    try {
+	    	SHA256 sha = SHA256.getInsatnce();
+	    	String shaPass = sha.getSha256(vo.getPwd().getBytes());
+	    	String bcPass = BCrypt.hashpw(shaPass, BCrypt.gensalt());
+	    	vo.setP_sha256(shaPass);
+	    	vo.setP_bcrypt(bcPass);		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	    // 회원정보 수정쿼리
 		mybatis.update("maisonMapper.user_edit", vo);
 	}
 	// 다이어리보기

@@ -40,7 +40,7 @@ public class MaisonServiceImpl implements MaisonService{
 	}
 	// 다이어리 로그인
 	@Override
-	public MaisonUserVO login_ok(MaisonUserVO vo) {
+	public String login_ok(MaisonUserVO vo) {
 		return dao.login_ok(vo);
 	}
 	// 회원정보수정

@@ -149,7 +149,8 @@ public class MaisonController {
 	// 로그인확인
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String login_ok(MaisonUserVO vo, HttpSession session) {
-		if(s.login_ok(vo) != null) {
+		String login = s.login_ok(vo);
+		if(login.equals("ssuccess")) {
 			session.setAttribute("id", vo.getId());
 		}
 		return "home.jsp";

@@ -12,7 +12,7 @@ public interface MaisonService {
 	MaisonContentVO date_list(MaisonContentVO vo);
 	MaisonPageVO page_list(MaisonPageVO vo);
 	List<MaisonContentVO> content_list(MaisonPageVO vo);
-	MaisonUserVO login_ok(MaisonUserVO vo);
+	String login_ok(MaisonUserVO vo);
 	MaisonUserVO user_master(MaisonUserVO vo);
 	void user_delete(MaisonUserVO vo);
 	void user_update(MaisonUserVO vo);

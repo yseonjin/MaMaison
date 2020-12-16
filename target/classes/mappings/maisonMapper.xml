@@ -3,8 +3,8 @@
 <mapper namespace="maisonMapper">
 <!-- 회원가입 -->
 	<insert id="userInsert">
-		INSERT INTO MAISON_USER (SEQ, ID, PWD, NAME, PHONE, ADDRESS, EMAIL) 
-			VALUES (USER_SEQ.NEXTVAL, #{id}, #{pwd}, #{name}, #{phone}, #{address}, #{email}) 
+		INSERT INTO MAISON_USER (SEQ, ID, PWD, P_SHA256, P_BCRYPT, NAME, PHONE, ADDRESS, EMAIL) 
+			VALUES (USER_SEQ.NEXTVAL, #{id}, #{pwd}, #{p_sha256},#{p_bcrypt}, #{name}, #{phone}, #{address}, #{email}) 
 	</insert>
 <!-- 사진업로드 -->	
 	<insert id="uploadInsert">
@@ -70,7 +70,7 @@
 <!-- 회원정보수정완료 -->
 	<update id="user_edit">
 		UPDATE MAISON_USER 
-		SET PWD=#{pwd}, NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}, EMAIL=#{email} 
+		SET PWD=#{pwd}, NAME=#{name}, PHONE=#{phone}, ADDRESS=#{address}, EMAIL=#{email} ,P_SHA256=#{p_sha256} , P_BCRYPT=#{p_bcrypt}
 		WHERE SEQ=#{seq}
 	</update>
 <!-- 사진첩 페이지나누기 -->
