@@ -1,6 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<head>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<style>
+		.swal-button 
+		{
+			background-color: #FFB2D9;
+			font-size: 12px;
+			text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+		}
+	</style>
+</head>
+<script>
+	function functionK(){
+	     if (f1.id.value=="") {
+	    	swal("ID는 필수입력!", "아이디는 필수입력입니다.", "error");
+	    	f1.id.value="";
+	        f1.id.focus(); 
+	        return  false ;
+	     }
+	
+	     if (f1.pwd.value.length < 4) {
+	        swal("비밀번호가 너무 짧아요! ", "비밀번호는 4자이상 입력해주세요", "error");
+	        f1.pwd.value="";
+	        f1.pwd.focus(); 
+	        return  false ;
+	     }
+	  }
+</script>
 <c:import url="./top.jsp"></c:import>
 <div class="container">
 	<div class="row-fluid">
@@ -34,8 +63,7 @@
       	<br><br><br>
       	<h2> Join Us! 환영합니다 </h2>
       	<br>
-      	  <form class="form-horizontal" action="join_insert.do"  method="post">
-      	  
+      	  <form class="form-horizontal" action="join_insert.do"  method="post" name="f1" onSubmit="return functionK();">      	  
       	  <table id="table_login">
       	  	<tr>
       	  		<td>

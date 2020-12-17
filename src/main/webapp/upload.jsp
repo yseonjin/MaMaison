@@ -1,6 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<head>
+  <script>
+  function fileCheck1(){
+  //만약에 input 값이 공백이 아니면 fildSize와 maxSize를 변수에 저장하고
+     if(document.getElementById("ufile").value!=""){
+        var fileSize = document.getElementById("ufile").files[0].size;
+        var maxSize = 2 * 1024 * 1024;//2MB
+	//비교했을때 fileSize가 더 크면 alert실행 return false;
+      if(fileSize > maxSize){
+         alert("첨부파일 사이즈는" + fileSize + " 2MB 이내로 등록 가능합니다. ");
+         return false
+       }
+    }             
+  </script>
+</head>
 <c:import url="./top.jsp"></c:import>
 <div class="container">
 	<div class="row-fluid">
@@ -34,7 +49,7 @@
       	<br><br>
       	<h2> 오늘을 저장하세요! </h2>
       	<br>
-      	  <form class="form-horizontal" action="upload_insert.do" method="POST" enctype="multipart/form-data" >
+      	  <form class="form-horizontal" action="upload_insert.do" method="POST" enctype="multipart/form-data" onSubmit="return fileCheck1()">
       	  <table id="table_diary">
       	  	<tr>
       	  		<td width="70">
@@ -49,7 +64,7 @@
       	  			&emsp;파일 :
       	  		</td>
       	  		<td>
-      	  			<input type="file" name="uploadFile" >
+      	  			<input type="file" name="uploadFile" id="ufile">
       	  		</td>
       	  	</tr>
       	  	<tr>
