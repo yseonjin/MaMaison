@@ -78,8 +78,29 @@ public class MaisonServiceImpl implements MaisonService{
 	public void diary_delete(MaisonContentVO vo) {
 		dao.diary_delete(vo);
 	}
+	// 다이어리 등록
 	@Override
 	public void diary_insert(MaisonContentVO vo) {
 		dao.diary_insert(vo);		
+	}
+	// 게시판 상세보기
+	@Override
+	public MaisonContentVO list_content(MaisonContentVO vo) {
+		return dao.list_content(vo);
+	}
+	// 게시판 수정하기
+	@Override
+	public void list_edit(MaisonContentVO vo) {
+		dao.list_edit(vo);
+	}
+	// 게시판 삭제하기
+	@Override
+	public void list_delete(MaisonContentVO vo) {
+		dao.list_delete(vo);
+	}
+	// 삭제할 파일이름 가져오기
+	@Override
+	public String delete_file(MaisonContentVO vo) {
+		return dao.delete_file(vo);
 	}
 }

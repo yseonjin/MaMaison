@@ -64,6 +64,66 @@ public class MaisonController {
 		s.insertUpload(vo);
 		return "list.do";
 	}
+	// 게시판 수정페이지 출력
+	@RequestMapping(value = "/list_content.do")
+	public String list_content(MaisonContentVO vo, Model m) {
+		m.addAttribute("c", s.list_content(vo));
+		return "list_content.jsp";
+	}
+	// 게시판 수정완료
+	@RequestMapping(value = "/upload_edit.do", method = RequestMethod.POST)
+	public String upload_edit(MaisonContentVO vo, HttpServletRequest request, HttpSession session) {
+		MaisonContentVO pre = s.list_content(vo);
+		String realPath = request.getSession().getServletContext().getRealPath("/file/");
+		System.out.println(realPath);
+		MultipartFile uploadFile = vo.getUploadFile();
+		// 만약에 업로드한 파일이있으면
+		if(!uploadFile.isEmpty()) {
+			// 기존파일삭제
+			File prefile = new File(realPath +pre.getFile_path());
+			prefile.delete();
+			// 새로운파일 저장     
+			String originalFileName = uploadFile.getOriginalFilename();
+			File file = new File(realPath+originalFileName);
+			String fileName = originalFileName.substring(0, originalFileName.lastIndexOf("."));
+			String extension = FilenameUtils.getExtension(originalFileName);
+			String saveFileName = fileName + "." + extension;
+			// 중복처리
+			if(file.isFile()) {
+				String ranId = UUID.randomUUID().toString();
+				saveFileName = fileName + ranId.substring(0,3) + "." + extension;
+			}
+			try {
+				vo.setFile_path(saveFileName);;
+				uploadFile.transferTo(new File(realPath+saveFileName));
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+			
+		}// 만약 수정한 파일이없다면
+		else {// 기존파일명그대로 받아서 업데이트
+			vo.setFile_path((pre.getFile_path()));
+		}
+		s.list_edit(vo);;
+		return "list.do";
+	}
+	// 게시판 삭제
+	@RequestMapping(value = "/upload_delete.do")
+	public String list_delete(MaisonContentVO vo, HttpServletRequest request) {
+		// 파일삭제
+		String fileName = s.delete_file(vo);
+		String path = request.getSession().getServletContext().getRealPath("/file/");
+		System.out.println(path);
+		File file = new File(path+fileName);
+		
+		if(file != null) {
+			file.delete();
+		}
+		// 데이터삭제
+		s.list_delete(vo);
+		return "list.do";
+	}
+	
 	// 다이어리 출력
 	@RequestMapping(value = "/date_list.do")
 	public String date_list(MaisonContentVO vo, Model m, HttpSession session) {

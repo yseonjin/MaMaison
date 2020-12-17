@@ -118,4 +118,27 @@
     	]]>	
 	
 	</select>
+<!-- 게시판 상세보기 -->
+	<select id="list_content" resultType="MaisonContentVO">
+		SELECT SEQ, TITLE, CONTENT, DT, FILE_PATH
+		FROM MAISON_CONTENT
+		WHERE SEQ=#{seq}
+	</select>
+<!-- 삭제할 파일이름 검색하기-->
+	<select id="delete_file" resultType="String">
+		SELECT FILE_PATH
+		FROM MAISON_CONTENT
+		WHERE SEQ=#{seq}
+	</select>
+<!-- 게시판 수정하기 -->
+	<update id="list_content_ok">
+		UPDATE MAISON_CONTENT 
+		SET TITLE=#{title}, CONTENT=#{content}, FILE_PATH=#{file_path}
+		WHERE SEQ=#{seq} AND C_FLAG='U'
+	</update>
+<!-- 게시판 삭제하기 -->
+	<delete id="list_delete">
+		DELETE FROM MAISON_CONTENT
+		WHERE SEQ=#{seq}
+	</delete>
 </mapper>

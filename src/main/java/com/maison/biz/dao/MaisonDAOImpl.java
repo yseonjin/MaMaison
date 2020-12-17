@@ -129,5 +129,25 @@ public class MaisonDAOImpl implements MaisonDAO{
 	public void diary_insert(MaisonContentVO vo) {
 		mybatis.insert("maisonMapper.diary_insert", vo);
 	}
+	// 게시판 상세보기
+	@Override
+	public MaisonContentVO list_content(MaisonContentVO vo) {
+		return mybatis.selectOne("maisonMapper.list_content", vo);
+	}
+	// 게시판 수정하기
+	@Override
+	public void list_edit(MaisonContentVO vo) {
+		mybatis.update("maisonMapper.list_content_ok", vo);
+	}
+	// 게시판 삭제하기
+	@Override
+	public void list_delete(MaisonContentVO vo) {
+		mybatis.delete("maisonMapper.list_delete", vo);
+	}
+	// 삭제할 파일이름 가져오기
+	@Override
+	public String delete_file(MaisonContentVO vo) {
+		return mybatis.selectOne("maisonMapper.delete_file", vo);
+	}
 
 }

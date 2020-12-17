@@ -37,18 +37,19 @@
       	<br>
       	  <table border=1 id="table_list">
       	  	<tr>
-      	  		<td> 제목 </td> <td> 파일 </td> <td> 작성일 </td>
+      	  		<td> 제목 </td> <td> 파일 </td> <td> 작성일 </td> <td> 상세보기 </td>
       	  	</tr>
       	  	<c:forEach items="${flist}" var="f">
       	  	<tr>
       	  		<td width=200> ${f.getTitle()} </td> 
       	  		<td width=200> <img src="./file/${f.getFile_path()}" width=100 height=100 > </td>
 				<td width=200> ${f.getDt()}</td>
+				<td width=200> <a href="list_content.do?seq=${f.getSeq()}"><input type="button" value="상세보기"></a></td>				
       	  	</tr>
       	 	</c:forEach>	
       	  	<tr>
       	  		<td colspan=4 align="center" >
- 				    <a href="upload.jsp"><button type="reset" class="btn">다시쓰기</button></a>
+ 				    <a href="upload.jsp"><input type="button" value="글추가하기"></a>
       	  		</td>
       	  	</tr>
 		</table> 

@@ -21,4 +21,8 @@ public interface MaisonService {
 	void diary_editOK(MaisonContentVO vo);
 	void diary_delete(MaisonContentVO vo);
 	void diary_insert(MaisonContentVO vo);
+	MaisonContentVO list_content(MaisonContentVO vo);
+	void list_edit(MaisonContentVO vo);
+	void list_delete(MaisonContentVO vo);
+	String delete_file(MaisonContentVO vo);
 }
