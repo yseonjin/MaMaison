@@ -141,4 +141,14 @@
 		DELETE FROM MAISON_CONTENT
 		WHERE SEQ=#{seq}
 	</delete>
+<!-- 좋아요 추가하기 -->
+	<update id="like">
+		 UPDATE MAISON_LIKE 
+		 SET LIKE_CHECK = LIKE_CHECK+1
+	</update>
+<!-- 좋아요 결과출력 -->
+	<select id="likeView" resultType="MaisonLikeVO">
+		SELECT LIKE_CHECK
+		FROM MAISON_LIKE
+	</select>
 </mapper>

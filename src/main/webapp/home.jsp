@@ -1,6 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- ajax -->
+<head>
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script>
+	$(document).ready(function(){
+		 $("#like_result").load("http://localhost:8081/biz/likeSelect.do #like_result");
+		 $("#like").click(function(){
+			  $.ajax({
+			   url: "http://localhost:8081/biz/likeok.do",
+			   success: function(data) {
+			      alert("감사합니다!");
+			      $("#like_result").load("http://localhost:8081/biz/likeSelect.do #like_result");
+			   },
+			   error: function(request, status, error){
+			      alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			   }
+			  });
+		});
+	});
+	</script>
+</head>
 <c:import url="./top.jsp"></c:import>
 <div class="container">
 	<div class="row-fluid">
@@ -30,7 +51,16 @@
     <section>
       <div class="span10">
       	<!--Body content-->
-      	<br><br><br><br>
+      	<br><br>
+      		<c:if test="${id != null}">
+      		  <form id="like_form">
+				<img src="./img/like.png" width=30 height=30> 
+      			<font size=3 color="#534847">우리 사이트가 마음에 들었다면 눌러주세요!</font>
+	      	    <input type="button" value="좋아요!" id="like">
+	      	    <div id="like_result">${like.like_check}  명이 좋아합니다.</div>
+	      	  </form>
+			</c:if>
+      	<br>
       	<img src="./img/main.jpg" class="img-circle" height=400 width=400>&emsp;&emsp;
       	<br>
       	<div id="main_text">

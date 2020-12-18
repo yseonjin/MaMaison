@@ -3,6 +3,7 @@ package com.maison.biz.dao;
 import java.util.List;
 
 import com.maison.biz.common.MaisonContentVO;
+import com.maison.biz.common.MaisonLikeVO;
 import com.maison.biz.common.MaisonPageVO;
 import com.maison.biz.common.MaisonUserVO;
 
@@ -25,4 +26,6 @@ public interface MaisonDAO {
 	void list_edit(MaisonContentVO vo);
 	void list_delete(MaisonContentVO vo);
 	String delete_file(MaisonContentVO vo);
+	void update_like();
+	MaisonLikeVO select_like();
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.maison.biz.common.MaisonContentVO;
+import com.maison.biz.common.MaisonLikeVO;
 import com.maison.biz.common.MaisonPageVO;
 import com.maison.biz.common.MaisonUserVO;
 import com.maison.biz.dao.MaisonDAO;
@@ -102,5 +103,15 @@ public class MaisonServiceImpl implements MaisonService{
 	@Override
 	public String delete_file(MaisonContentVO vo) {
 		return dao.delete_file(vo);
+	}
+	// 좋아요 추가하기
+	@Override
+	public void update_like() {
+		dao.update_like();
+	}
+	// 좋아요 수 구하기
+	@Override
+	public MaisonLikeVO select_like() {
+		return dao.select_like();
 	}
 }

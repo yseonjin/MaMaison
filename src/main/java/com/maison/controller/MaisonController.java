@@ -224,5 +224,19 @@ public class MaisonController {
 		session.invalidate();
 		return "home.jsp";
 	}
+	// 좋아요올리기
+	@RequestMapping(value = "/likeok.do")
+	public String likeok(Model m) {
+		System.out.println("컨트롤러까지");
+		s.update_like();
+		return "likeSelect.do";
+	}
+	// 좋아요확인하기
+	@RequestMapping(value = "/likeSelect.do")
+	public String likeSelect(Model m) {
+		System.out.println("select");
+		m.addAttribute("like", s.select_like());
+		return "home.jsp";
+	}
 	
 }
