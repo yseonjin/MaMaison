@@ -11,6 +11,7 @@ public class MaisonUserVO {
 	private String address;
 	private String email;
 	private String joindate;
+	private String like_yn;
 	
 	public int getSeq() {
 		return seq;
@@ -72,11 +73,20 @@ public class MaisonUserVO {
 	public void setP_bcrypt(String p_bcrypt) {
 		this.p_bcrypt = p_bcrypt;
 	}
+	
+	public String getLike_yn() {
+		return like_yn;
+	}
+	public void setLike_yn(String like_yn) {
+		this.like_yn = like_yn;
+	}
 	@Override
 	public String toString() {
 		return "MaisonUserVO [seq=" + seq + ", id=" + id + ", pwd=" + pwd + ", p_sha256=" + p_sha256 + ", p_bcrypt="
 				+ p_bcrypt + ", name=" + name + ", phone=" + phone + ", address=" + address + ", email=" + email
-				+ ", joindate=" + joindate + "]";
+				+ ", joindate=" + joindate + ", like_yn=" + like_yn + "]";
 	}
+	
+	
 	
 }

@@ -84,5 +84,5 @@
 </div>
 <c:import url="./bottom.jsp"></c:import>
 <script>
-document.getElementById('dt').value = new Date().toISOString().substring(0, 10);
+	document.getElementById('dt').value = new Date().toISOString().substring(0, 10);
 </script>

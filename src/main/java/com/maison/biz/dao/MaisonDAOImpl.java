@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.maison.biz.common.MaisonContentVO;
-import com.maison.biz.common.MaisonLikeVO;
 import com.maison.biz.common.MaisonPageVO;
 import com.maison.biz.common.MaisonUserVO;
 @Repository
@@ -36,11 +35,6 @@ public class MaisonDAOImpl implements MaisonDAO{
 	@Override
 	public void insertUpload(MaisonContentVO vo) {
 		mybatis.insert("maisonMapper.uploadInsert", vo);
-	}
-	// 다이어리날짜목록
-	@Override
-	public MaisonContentVO date_list(MaisonContentVO vo) {
-		return mybatis.selectOne("maisonMapper.date_list", vo);
 	}
 	// 사진첩페이지나누기
 	@Override
@@ -105,6 +99,11 @@ public class MaisonDAOImpl implements MaisonDAO{
 	    // 회원정보 수정쿼리
 		mybatis.update("maisonMapper.user_edit", vo);
 	}
+	// 다이어리날짜목록
+	@Override
+	public MaisonContentVO date_list(MaisonContentVO vo) {
+		return mybatis.selectOne("maisonMapper.date_list", vo);
+	}
 	// 다이어리보기
 	@Override
 	public MaisonContentVO diary_list(MaisonContentVO vo) {
@@ -150,15 +149,20 @@ public class MaisonDAOImpl implements MaisonDAO{
 	public String delete_file(MaisonContentVO vo) {
 		return mybatis.selectOne("maisonMapper.delete_file", vo);
 	}
-	// 좋아요 업데이트
-	@Override
-	public void update_like() {
-		mybatis.update("maisonMapper.like");
-	}
 	// 좋아요 수 구하기
 	@Override
-	public MaisonLikeVO select_like() {
+	public int select_like() {
 		return 	mybatis.selectOne("maisonMapper.likeView");
     }
+	// 좋아요 확인하기
+	@Override
+	public String select_yn(MaisonUserVO vo) {
+		return 	mybatis.selectOne("maisonMapper.ynView", vo);
+	}
+	// 좋아요 Y로 변경하기
+	@Override
+	public void change_yn(MaisonUserVO vo) {
+		mybatis.update("maisonMapper.likeUpdate", vo);
+	}
 
 }

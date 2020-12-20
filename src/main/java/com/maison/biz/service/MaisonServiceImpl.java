@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.maison.biz.common.MaisonContentVO;
-import com.maison.biz.common.MaisonLikeVO;
 import com.maison.biz.common.MaisonPageVO;
 import com.maison.biz.common.MaisonUserVO;
 import com.maison.biz.dao.MaisonDAO;
@@ -29,17 +28,22 @@ public class MaisonServiceImpl implements MaisonService{
 	public MaisonContentVO date_list(MaisonContentVO vo) {
 		return dao.date_list(vo);
 	}
-	// 사진첩 페이지나누기
+	// 다이어리보기
+	@Override
+	public MaisonContentVO diary_list(MaisonContentVO vo) {
+		return dao.diary_list(vo);
+	}
+	// 페이지나누기
 	@Override
 	public MaisonPageVO page_list(MaisonPageVO vo) {
 		return dao.page_list(vo);
 	}
-	// 다이어리 사진첩목록보기
+	// 사진첩목록보기
 	@Override
 	public List<MaisonContentVO> content_list(MaisonPageVO vo) {
 		return dao.content_list(vo);
 	}
-	// 다이어리 로그인
+	// 로그인
 	@Override
 	public String login_ok(MaisonUserVO vo) {
 		return dao.login_ok(vo);
@@ -58,11 +62,6 @@ public class MaisonServiceImpl implements MaisonService{
 	@Override
 	public void user_update(MaisonUserVO vo) {
 		dao.user_update(vo);
-	}
-	// 다이어리보기
-	@Override
-	public MaisonContentVO diary_list(MaisonContentVO vo) {
-		return dao.diary_list(vo);
 	}
 	// 다이어리수정보기
 	@Override
@@ -104,14 +103,19 @@ public class MaisonServiceImpl implements MaisonService{
 	public String delete_file(MaisonContentVO vo) {
 		return dao.delete_file(vo);
 	}
-	// 좋아요 추가하기
-	@Override
-	public void update_like() {
-		dao.update_like();
-	}
 	// 좋아요 수 구하기
 	@Override
-	public MaisonLikeVO select_like() {
+	public int select_like() {
 		return dao.select_like();
+	}
+	// 좋아요여부 확인하기
+	@Override
+	public String select_yn(MaisonUserVO vo) {
+		return dao.select_yn(vo);
+	}
+	// 좋아요 Y로 변경하기
+	@Override
+	public void change_yn(MaisonUserVO vo) {
+		dao.change_yn(vo);
 	}
 }

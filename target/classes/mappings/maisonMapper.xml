@@ -26,7 +26,7 @@
 		FROM MAISON_CONTENT
 		WHERE TO_CHAR(dt,'yyyy-mm-dd')=#{baseDate} AND C_FLAG='D' AND ID = #{id}
 	</select>
-<!-- 다이어리리 수정보기 -->
+<!-- 다이어리 수정보기 -->
 	<select id="diary_edit" resultType="MaisonContentVO">
 		SELECT SEQ, TITLE, CONTENT, CONDITION, DT, C_FLAG 
 		FROM MAISON_CONTENT
@@ -97,7 +97,8 @@
 		       END AS "content_cnt"
 		     , (TO_NUMBER(#{now_page})*5)-4 AS "start_content"
 		     , CASE WHEN (TO_NUMBER(#{now_page})*5)-4 = COUNT(*) THEN (TO_NUMBER(#{now_page})*5)-4
-		                                                   ELSE (((TO_NUMBER(#{now_page})*5)-4) + CASE WHEN TO_NUMBER(#{now_page}) * 5 < COUNT(*) THEN 5 ELSE MOD(COUNT(*), 5) END) - 1
+		                                                   ELSE (((TO_NUMBER(#{now_page})*5)-4) + CASE WHEN TO_NUMBER(#{now_page}) * 5 < COUNT(*) 
+		                                                   THEN 5 ELSE MOD(COUNT(*), 5) END) - 1
 		       END AS "end_content"
 	  		FROM (SELECT ROWNUM R_NUM, C.* FROM MAISON_CONTENT C WHERE C_FLAG = 'U' AND ID = #{id})
     	]]>	
@@ -146,9 +147,22 @@
 		 UPDATE MAISON_LIKE 
 		 SET LIKE_CHECK = LIKE_CHECK+1
 	</update>
+<!-- 좋아요 여부 확인하기 -->
+	<select id="ynView" resultType="String">
+		SELECT LIKE_YN 
+		FROM MAISON_USER
+		WHERE ID = #{id}
+	</select>
+<!-- 좋아요 변경하기 -->
+	<update id="likeUpdate">
+		update maison_user 
+		set like_yn = 'Y'
+		where id = #{id}
+	</update>
 <!-- 좋아요 결과출력 -->
-	<select id="likeView" resultType="MaisonLikeVO">
-		SELECT LIKE_CHECK
-		FROM MAISON_LIKE
+	<select id="likeView" resultType="Integer">
+		SELECT COUNT(CASE WHEN LIKE_YN = 'Y' THEN 1 END) 
+		       LIKE_YN
+  		FROM MAISON_USER
 	</select>
 </mapper>

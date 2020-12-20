@@ -57,7 +57,7 @@
 				<img src="./img/like.png" width=30 height=30> 
       			<font size=3 color="#534847">우리 사이트가 마음에 들었다면 눌러주세요!</font>
 	      	    <input type="button" value="좋아요!" id="like">
-	      	    <div id="like_result">${like.like_check}  명이 좋아합니다.</div>
+	      	    <div id="like_result">${like}  명이 좋아합니다.</div>
 	      	  </form>
 			</c:if>
       	<br>

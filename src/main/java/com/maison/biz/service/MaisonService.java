@@ -3,7 +3,6 @@ package com.maison.biz.service;
 import java.util.List;
 
 import com.maison.biz.common.MaisonContentVO;
-import com.maison.biz.common.MaisonLikeVO;
 import com.maison.biz.common.MaisonPageVO;
 import com.maison.biz.common.MaisonUserVO;
 
@@ -26,6 +25,7 @@ public interface MaisonService {
 	void list_edit(MaisonContentVO vo);
 	void list_delete(MaisonContentVO vo);
 	String delete_file(MaisonContentVO vo);
-	void update_like();
-	MaisonLikeVO select_like();
+	String select_yn(MaisonUserVO vo);
+	void change_yn(MaisonUserVO vo);
+	int select_like();
 }

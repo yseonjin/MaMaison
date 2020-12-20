@@ -224,17 +224,24 @@ public class MaisonController {
 		session.invalidate();
 		return "home.jsp";
 	}
-	// 좋아요올리기
+	
+	// 좋아요 'Y', 'N'확인 / 좋아요 처리하기
 	@RequestMapping(value = "/likeok.do")
-	public String likeok(Model m) {
-		System.out.println("컨트롤러까지");
-		s.update_like();
-		return "likeSelect.do";
+	public String likeok(Model m, MaisonUserVO vo , HttpSession session) {
+		System.out.println("컨트롤");
+		vo.setId((String)session.getAttribute("id"));
+		String yn = s.select_yn(vo);
+		if(yn.equals("Y")) {
+			return "home.jsp";
+		}else {
+			s.change_yn(vo);
+			return "likeSelect.do";		
+		}
 	}
 	// 좋아요확인하기
 	@RequestMapping(value = "/likeSelect.do")
-	public String likeSelect(Model m) {
-		System.out.println("select");
+	public String likeSelect(Model m, HttpSession session ,MaisonUserVO vo) {
+		vo.setId((String)session.getAttribute("id"));
 		m.addAttribute("like", s.select_like());
 		return "home.jsp";
 	}
